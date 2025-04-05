@@ -16,3 +16,12 @@ Per aggiornare le librerie che sono installate con pip usare il comando :
 
 Quando un altro sviluppatore o un ambiente di produzione deve configurare lo stesso ambiente, basterà eseguire:
 > pip install -r requirements.txt
+
+Per fare partire il server
+> uvicorn app.main:app --reload
+
+> Per utilizzare il log se deve aggiugere questo su ogni file
+import logging
+logger = logging.getLogger(__name__)
+
+poi usare logger.info(....)
