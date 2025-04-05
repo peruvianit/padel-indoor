@@ -3,6 +3,10 @@ from datetime import timedelta
 from app.services import auth
 from pydantic import BaseModel
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 router = APIRouter()
 
 # Schema per ricevere le credenziali di login
@@ -17,6 +21,7 @@ class TokenResponse(BaseModel):
 
 @router.post("/token", response_model=TokenResponse)
 def login_for_access_token(form_data: TokenRequest):
+    logger.info(f"Richiesta di accesso per l'utente: {form_data.username}")
     # In un caso reale, dovresti verificare le credenziali dell'utente
     if form_data.username != "testuser" or form_data.password != "secret":
         raise HTTPException(
