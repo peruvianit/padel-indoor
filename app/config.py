@@ -1,14 +1,13 @@
-# app/config.py
 import os
 import logging.config
 
 print(">>> Caricamento config.py")
 
-# Assicurati che la cartella dei log esista
-LOGS_DIR = os.path.join(os.path.dirname(__file__), "..", "logs")
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+LOGS_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "logs"))
 os.makedirs(LOGS_DIR, exist_ok=True)
 
-LOG_FILE = os.path.join(LOGS_DIR, "app.log")
+LOG_FILE = os.path.abspath(os.path.join(LOGS_DIR, "app.log"))
 
 LOGGING_CONFIG = {
     "version": 1,

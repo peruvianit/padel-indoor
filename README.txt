@@ -25,3 +25,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 poi usare logger.info(....)
+
+Se trovi errore che non trova un import dopo che modifichi il main.py
+eseguire questo script che sta dentro del progetto dal terminale
+
+python tools/clean_pycache.py
