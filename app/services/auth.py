@@ -3,11 +3,7 @@ from typing import Optional
 from jose import JWTError, jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-
-# Impostazioni per JWT
-SECRET_KEY = "la-tua-chiave-segreta"  # Dovresti usare una chiave sicura in produzione
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+from app.configuration.settings import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -20,9 +16,9 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.utcnow() + expires_delta
     else:
         # Scadenza predefinita: 30 minuti
-        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
 
 def verify_token(token: str):
@@ -30,7 +26,7 @@ def verify_token(token: str):
     Verifica e decodifica il token JWT.
     """
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
             raise HTTPException(

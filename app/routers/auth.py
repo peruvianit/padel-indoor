@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from datetime import timedelta
 from app.services import auth
 from pydantic import BaseModel
+from app.configuration.settings import settings
 
 import logging
 
@@ -32,6 +33,6 @@ def login_for_access_token(form_data: TokenRequest):
     # Creiamo il token, includendo "sub" (subject) con il nome utente
     access_token = auth.create_access_token(
         data={"sub": form_data.username},
-        expires_delta=timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
+        expires_delta=timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     )
     return {"access_token": access_token, "token_type": "bearer"}
