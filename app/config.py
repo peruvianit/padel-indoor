@@ -19,10 +19,13 @@ LOGGING_CONFIG = {
     },
     "handlers": {
         "file_handler": {
-            "class": "logging.FileHandler",
+            "class": "logging.handlers.RotatingFileHandler",  # ✅
             "formatter": "standard",
             "filename": LOG_FILE,
             "level": "INFO",
+            "maxBytes": 5 * 1024 * 1024,  # ✅ 5MB per file
+            "backupCount": 5,             # ✅ mantieni fino a 5 file di backup
+            "encoding": "utf-8",          # ✅ supporta caratteri speciali
         },
         "console": {
             "class": "logging.StreamHandler",
