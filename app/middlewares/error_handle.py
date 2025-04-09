@@ -19,7 +19,7 @@ async def global_error_handler(request: Request, call_next):
             "timestamp": datetime.utcnow().isoformat(),
             "path": request.url.path,
             "tipo": error_type,
-            "messagio": str(e)
+            "messaggio": str(e)
         }
 
         return JSONResponse(
