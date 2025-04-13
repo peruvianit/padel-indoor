@@ -8,8 +8,18 @@ import logging
 # Configura il logging
 logger = logging.getLogger(__name__)
 
+# Middlewares
 from app.middlewares.error_handle import global_error_handler
+
+# Routers
 from app.routers import auth, users  # Importa sia auth che users
+
+# Database
+from app.db import engine  # engine creato in app/db.py
+from app.models.models import Base  # Base con tutti i modelli SQLAlchemy
+
+# Creazione automatica delle tabelle all'avvio (facoltativo per sviluppo)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.name = "FastAPI-Padel indoor"
@@ -22,8 +32,6 @@ app.license_info = {
 
 # ✅ Registra il middleware
 app.middleware("http")(global_error_handler)
-
-
 
 app.include_router(auth.router)
 app.include_router(users.router)  
