@@ -21,7 +21,18 @@ from app.models.models import Base  # Base con tutti i modelli SQLAlchemy
 # Creazione automatica delle tabelle all'avvio (facoltativo per sviluppo)
 Base.metadata.create_all(bind=engine)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # React URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.name = "FastAPI-Padel indoor"
 app.description = "API per la gestione di un centro sportivo di Padel indoor"
 app.version = "0.1.0"
