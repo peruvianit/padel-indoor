@@ -1,16 +1,30 @@
 import { useState } from 'react';
 import logo from '../logo.svg'; // Assicurati che il path sia corretto
+import axios from 'axios';
 
 function Login({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('pippo.rossi_21');
+  const [password, setPassword] = useState('@aP9Lm$z2#rW');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'password') {
+  
+    try {
+      await axios.post('http://localhost:8000/token', {
+        username,
+        password,
+      }, {
+        withCredentials: true, // 🔴 fondamentale per cookie HttpOnly
+        headers: {
+          'Content-Type': 'application/json', // ✅ manda JSON
+        },
+      });
+  
+      // Login avvenuto con successo
       onLogin();
-    } else {
-      alert('Credenziali sbagliate!');
+    } catch (err) {
+      alert('Credenziali sbagliate o errore nel login!');
+      console.error(err);
     }
   };
 

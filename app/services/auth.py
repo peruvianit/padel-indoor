@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import Request, Depends, HTTPException, status
+from fastapi.security import HTTPBearer, OAuth2PasswordBearer, HTTPAuthorizationCredentials
 from app.configuration.settings import settings
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+bearer_scheme = HTTPBearer(auto_error=False)  # ✅ non lancia errore se manca
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     """
@@ -42,8 +42,20 @@ def verify_token(token: str):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-def get_current_user(token: str = Depends(oauth2_scheme)):
-    """
-    Dependency per ottenere l'utente corrente a partire dal token.
-    """
+def get_current_user(request: Request, credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme)):
+    token_cookie = request.cookies.get("access_token")
+    token_header = credentials.credentials if credentials else None
+
+    print("🍪 Cookie:", token_cookie)
+    print("🔐 Header:", token_header)
+
+    token = token_cookie or token_header
+
     return verify_token(token)
+
+
+#def get_current_user(token: str = Depends(oauth2_scheme)):
+#    """
+#    Dependency per ottenere l'utente corrente a partire dal token.
+#    """
+#    return verify_token(token)
