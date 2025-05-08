@@ -1,24 +1,16 @@
-// Funzione per registrare il Service Worker
 export function register() {
+  console.log('Funzione register chiamata');  // Questo dovrebbe apparire nella console
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
+      console.log("Pagina caricata, registrazione del service worker...");
       navigator.serviceWorker
-        .register('/service-worker.js')  // Assicurati che il service worker sia nel percorso giusto
+        .register('/service-worker.js')  // Assicurati che il percorso del service worker sia corretto
         .then((registration) => {
           console.log('Service Worker registrato con successo:', registration);
         })
         .catch((error) => {
           console.error('Errore nella registrazione del Service Worker:', error);
         });
-    });
-  }
-}
-
-// Funzione per annullare la registrazione del Service Worker (se necessario)
-export function unregister() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then((registration) => {
-      registration.unregister();
     });
   }
 }
