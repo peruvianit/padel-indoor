@@ -10,7 +10,8 @@ function Login({ onLogin }) {
     e.preventDefault();
   
     try {
-      await axios.post('http://localhost:8000/token', {
+      console.log(`${process.env.REACT_APP_CONTEXT}/token`);  
+      await axios.post(`${process.env.REACT_APP_CONTEXT}/token`, {
         username,
         password,
       }, {
