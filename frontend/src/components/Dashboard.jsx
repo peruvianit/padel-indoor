@@ -12,6 +12,7 @@ function Dashboard({ onLogout }) {
 
     const getDebugCookie = async () => {
         try {
+            console.log("Chiamato metodo : getDebugCookie");
             const res = await axios.get('http://localhost:8000/debug-cookie', {
               withCredentials: true,
             });

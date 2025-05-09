@@ -1,19 +1,11 @@
 {
-  "short_name": "Padel Indoor",
-  "screenshots": [
-    {
-      "src": "screenshot-wide.png",
-      "sizes": "1280x800",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "screenshot-small.png",
-      "sizes": "640x360",
-      "type": "image/png"
-    }
-  ],
-  "name": "Padel Indoor",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "categories":["sports"],
+  "description":"Questa è un'applicazione PWA per informazione del centro sportivo Padel Indoor",
+  "dir":"ltr",
+  "display_override": ["standalone","fullscreeen"],
+  "display": "standalone",
   "icons": [
     {
       "src": "favicon_16x16.png",
@@ -46,8 +38,23 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "lang": "it-IT",
+  "orientation":"portrait",
+  "prefer_related_application": false,
+  "short_name": "Padel indoor",
+  "name": "Cebtro sportivo padel indoor",
+  "screenshots": [
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-small.png",
+      "sizes": "640x360",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/"
 }
