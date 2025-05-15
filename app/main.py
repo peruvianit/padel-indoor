@@ -27,7 +27,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React URL
+    allow_origins=[
+        "http://localhost:3000",               # per sviluppo locale
+        "https://mio-frontend.web.app",        # frontend online
+        "https://padel-indoor.onrender.com/"   # opzionale se fai richieste da backend a se stesso
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
