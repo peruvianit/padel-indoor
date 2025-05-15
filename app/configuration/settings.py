@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # Database
-    DB_URL: str = "postgresql+psycopg://postgres:postgres@localhost:5432/IAM"
+    DB_URL: str = "postgresql+psycopg://padelindoor:7JM0Ygu9zouNA0htvMgRR0Dg9ZFFZCSK@dpg-d0j0ogeuk2gs73ar5j30-a:5432/padelindoor"
     #DB_URL: str = "postgresql+psycopg://postgres:postgres@host.docker.internal:5432/IAM"
 
     class Config:
